@@ -15,13 +15,11 @@ namespace ToDoApp.Data.Context
         public DbSet <Models.Task> Tasks { get; set; }
         public DbSet<User> Users { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public ToDoContext(DbContextOptions<ToDoContext> options)
+             : base(options)
         {
-
-            optionsBuilder.UseNpgsql("Host=localhost;Database=vikahykava;Username=postgres;Password=07082004");
-            base.OnConfiguring(optionsBuilder);
-
         }
+
 
         // model configuration
         protected override void OnModelCreating(ModelBuilder modelBuilder)
