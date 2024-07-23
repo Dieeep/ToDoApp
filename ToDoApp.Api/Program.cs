@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using ToDoApp.Api.Services;
 using ToDoApp.Data.Context;
+using ToDoApp.Services.Interfaces;
+using ToDoApp.Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,9 @@ builder.Services.AddDbContext<ToDoContext>(options =>
 {
     options.UseNpgsql(connectionString);
 });
+
+builder.Services.AddScoped<IBoardService, BoardService>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 
 //builder.Services.AddTransient();
 //builder.Services.AddScoped();

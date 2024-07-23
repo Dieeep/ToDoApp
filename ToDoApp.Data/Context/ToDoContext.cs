@@ -12,7 +12,7 @@ namespace ToDoApp.Data.Context
     {
         public DbSet<Board> Boards { get; set; }
         public DbSet<Status> Statuses { get; set; }
-        public DbSet <Models.Task> Tasks { get; set; }
+        public DbSet <Models.TaskItem> Tasks { get; set; }
         public DbSet<User> Users { get; set; }
 
         public ToDoContext(DbContextOptions<ToDoContext> options)
@@ -28,25 +28,25 @@ namespace ToDoApp.Data.Context
                 .HasKey(b => b.Id);
             modelBuilder.Entity<Board>()
                 .Property(b => b.CreatedAt)
-                .IsRequired();
+                .HasDefaultValueSql("now()");
 
             modelBuilder.Entity<Status>()
                 .HasKey(s => s.Id);
 
-            modelBuilder.Entity<ToDoApp.Data.Models.Task>()
+            modelBuilder.Entity<ToDoApp.Data.Models.TaskItem>()
                 .HasKey(t => t.Id);
-            modelBuilder.Entity<ToDoApp.Data.Models.Task>()
+            modelBuilder.Entity<ToDoApp.Data.Models.TaskItem>()
                 .Property(t => t.CreatedAt)
-                .IsRequired();
-            modelBuilder.Entity<ToDoApp.Data.Models.Task>()
+                .HasDefaultValueSql("now()");
+            modelBuilder.Entity<ToDoApp.Data.Models.TaskItem>()
                 .HasOne(t => t.Board)
                 .WithMany(b => b.Tasks)
                 .HasForeignKey(t => t.BoardId);
-            modelBuilder.Entity<ToDoApp.Data.Models.Task>()
+            modelBuilder.Entity<ToDoApp.Data.Models.TaskItem>()
                 .HasOne(t => t.Status)
                 .WithMany(s => s.Tasks)
                 .HasForeignKey(t => t.StatusId);
-            modelBuilder.Entity<ToDoApp.Data.Models.Task>()
+            modelBuilder.Entity<ToDoApp.Data.Models.TaskItem>()
                 .HasOne(t => t.Assignee)
                 .WithMany(u => u.Tasks)
                 .HasForeignKey(t => t.AssigneeId);

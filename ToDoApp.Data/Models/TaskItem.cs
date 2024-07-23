@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ToDoApp.Data.Models
 {
-    public class Task
+    public class TaskItem
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -18,6 +18,7 @@ namespace ToDoApp.Data.Models
         public Status Status { get; set; }
         public int AssigneeId { get; set; }
         public User Assignee { get; set; }
+
 
     }
 }
